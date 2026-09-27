@@ -6,8 +6,10 @@ namespace OOP
     {
 
         Stopwatch sw = new Stopwatch();
+        Point button_Possition;
         public Form1()
         {
+            button_Possition = new Point(100, 100);
             InitializeComponent();
         }
 
@@ -23,14 +25,38 @@ namespace OOP
         }
 
         private void Exit_Click(object sender, EventArgs e)
-        { 
+        {
             this.Close();
         }
 
-        private void Open_From2(object sender, EventArgs e) 
+        private void Open_Form2(object sender, EventArgs e)
         {
             Form2 newForm = new Form2();
             newForm.Show();
+        }
+        private void Create_Button_Click(object sender, EventArgs e)
+        {
+            Button newButton = new Button();
+            newButton.Text = "Ckick to dekete this button";
+            newButton.Location = button_Possition;
+            newButton.BackColor = Color.White;
+
+            newButton.Click += Delete_Button_Click;
+
+            this.Controls.Add(newButton);
+
+            button_Possition.Y += 10;
+        }
+
+        private void Delete_Button_Click(Object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            this.Controls.Remove(button);
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawRectangle(Pens.Red, 40, 40 ,40 ,40);
         }
     }
 }

@@ -28,13 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             checkbox = new CheckBox();
             label1 = new Label();
             move_control_label = new Label();
             panel1 = new Panel();
-            radioButton1 = new RadioButton();
+            trackBar1 = new TrackBar();
             comboBox1 = new ComboBox();
+            radioButton1 = new RadioButton();
+            timer1 = new System.Windows.Forms.Timer(components);
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
             // 
             // checkbox
@@ -69,6 +73,7 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.MenuHighlight;
+            panel1.Controls.Add(trackBar1);
             panel1.Controls.Add(comboBox1);
             panel1.Controls.Add(radioButton1);
             panel1.Location = new Point(497, 50);
@@ -76,6 +81,25 @@
             panel1.Padding = new Padding(0, 10, 10, 0);
             panel1.Size = new Size(272, 339);
             panel1.TabIndex = 4;
+            // 
+            // trackBar1
+            // 
+            trackBar1.Location = new Point(34, 123);
+            trackBar1.Minimum = 1;
+            trackBar1.Name = "trackBar1";
+            trackBar1.Size = new Size(130, 56);
+            trackBar1.TabIndex = 6;
+            trackBar1.Value = 1;
+            trackBar1.Scroll += trackBar1_Scroll;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(34, 70);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(151, 28);
+            comboBox1.TabIndex = 5;
+            comboBox1.SelectedIndexChanged += combobox1_SelectedIndexChanged;
             // 
             // radioButton1
             // 
@@ -87,15 +111,13 @@
             radioButton1.TabStop = true;
             radioButton1.Text = "radioButton1";
             radioButton1.UseVisualStyleBackColor = true;
+            radioButton1.CheckedChanged += radio_CheckedChanged;
             // 
-            // comboBox1
+            // timer1
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(34, 70);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
-            comboBox1.TabIndex = 5;
-            comboBox1.
+            timer1.Enabled = true;
+            timer1.Interval = 1000;
+            timer1.Tick += timer1_Tick;
             // 
             // Form2
             // 
@@ -108,9 +130,11 @@
             Controls.Add(checkbox);
             Name = "Form2";
             Text = "Form2";
-            MouseMove += mose_move_control;
+            MouseDoubleClick += Form2_MouseDoubleClick;
+            MouseMove += mouse_move_control;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -124,5 +148,7 @@
         private Panel panel1;
         private ComboBox comboBox1;
         private RadioButton radioButton1;
+        private TrackBar trackBar1;
+        private System.Windows.Forms.Timer timer1;
     }
 }

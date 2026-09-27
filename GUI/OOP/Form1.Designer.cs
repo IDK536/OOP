@@ -32,8 +32,8 @@
             textBox1 = new TextBox();
             exit = new Button();
             open_form2 = new Button();
-            create_new_form = new Button();
             create_button = new Button();
+            panel1 = new Panel();
             SuspendLayout();
             // 
             // work_time
@@ -74,33 +74,33 @@
             open_form2.TabIndex = 3;
             open_form2.Text = "Open second window";
             open_form2.UseVisualStyleBackColor = true;
-            open_form2.Click += Open_From2;
-            // 
-            // create_new_form
-            // 
-            create_new_form.Location = new Point(660, 423);
-            create_new_form.Name = "create_new_form";
-            create_new_form.Size = new Size(199, 104);
-            create_new_form.TabIndex = 4;
-            create_new_form.Text = "Create new form";
-            create_new_form.UseVisualStyleBackColor = true;
+            open_form2.Click += Open_Form2;
             // 
             // create_button
             // 
-            create_button.Location = new Point(660, 300);
+            create_button.Location = new Point(653, 423);
             create_button.Name = "create_button";
-            create_button.Size = new Size(199, 91);
+            create_button.Size = new Size(214, 104);
             create_button.TabIndex = 5;
             create_button.Text = "Create new button";
             create_button.UseVisualStyleBackColor = true;
+            create_button.Click += Create_Button_Click;
+            // 
+            // panel1
+            // 
+            panel1.Location = new Point(598, 119);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(250, 125);
+            panel1.TabIndex = 6;
+            panel1.Paint += panel1_Paint;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(914, 600);
+            Controls.Add(panel1);
             Controls.Add(create_button);
-            Controls.Add(create_new_form);
             Controls.Add(open_form2);
             Controls.Add(exit);
             Controls.Add(textBox1);
@@ -119,7 +119,7 @@
         private TextBox textBox1;
         private Button exit;
         private Button open_form2;
-        private Button create_new_form;
         private Button create_button;
+        private Panel panel1;
     }
 }
