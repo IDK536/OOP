@@ -21,15 +21,15 @@ void checkPoint() {
 
     checkCopyPoint(p);
 
-    Point* pp1 = new Point();
+    Point *pp1 = new Point();
     std::cout << "pp1: " << pp1->getX() << ", " << pp1->getY() << '\n';
 
     delete pp1;
 
-    Point* pp2 = new Point(1, 3);
+    Point *pp2 = new Point(1, 3);
     std::cout << "pp2: " << pp2->getX() << ", " << pp2->getY() << '\n';
 
-    Point* pp3 = new Point(*pp2);
+    Point *pp3 = new Point(*pp2);
     std::cout << "pp3: " << pp3->getX() << ", " << pp3->getY() << '\n';
 
     checkCopyPoint(*pp2);
