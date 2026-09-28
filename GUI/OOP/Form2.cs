@@ -76,15 +76,6 @@ namespace OOP
             trackBar1.Value += 1;
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form2_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-
-        }
     }
 
     public class Collor

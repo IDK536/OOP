@@ -130,7 +130,6 @@
             Controls.Add(checkbox);
             Name = "Form2";
             Text = "Form2";
-            MouseDoubleClick += Form2_MouseDoubleClick;
             MouseMove += mouse_move_control;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

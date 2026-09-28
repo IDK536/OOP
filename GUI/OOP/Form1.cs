@@ -6,7 +6,10 @@ namespace OOP
     {
 
         Stopwatch sw = new Stopwatch();
+
         Point button_Possition;
+        int count = 0;
+        int checkedCount = 1;
         public Form1()
         {
             button_Possition = new Point(100, 100);
@@ -16,7 +19,7 @@ namespace OOP
         private void Form1_Load(object sender, EventArgs e)
         {
             sw.Start();
-            this.ControlBox = false;
+            //this.ControlBox = false;
         }
 
         private void Work_Time_Click(object sender, EventArgs e)
@@ -56,7 +59,44 @@ namespace OOP
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawRectangle(Pens.Red, 40, 40 ,40 ,40);
+            e.Graphics.DrawRectangle(Pens.Red, 40, 40, 40, 40);
+            count++;
+            label1.Text = count.ToString();
+        }
+
+        private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (e.NewValue == CheckState.Checked)
+            {
+                checkedCount++;
+            }
+            else
+            {
+                checkedCount--;
+            }
+
+            if (checkedCount == 3)
+            {
+                if (e.Index <= 1)
+                {
+                    checkedListBox1.SetItemChecked(e.Index + 1, false);
+                }
+                else
+                {
+                    checkedListBox1.SetItemChecked(0, false);
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            button1.Enabled = false;
+            timer1.Stop();
         }
     }
 }
