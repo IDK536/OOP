@@ -1,6 +1,8 @@
 #include <iostream>
 #include "classes/point.h"
 #include "classes/line.h"
+#include "classes/color_point.h"
+#include "classes/parallelogram.h"
 
 
 void checkCopyPoint(Point p) {}
@@ -63,9 +65,43 @@ void checkLine() {
     l1.print();
 }
 
+void colorPointCheck() {
+    ColorPoint cp("red", 1, 2);
+
+    cp.print();
+
+    cp.setCollor("blue");
+
+    cp.print();
+
+    Point *p = new ColorPoint("red", 1, 2);
+
+    p->print();
+
+    ((ColorPoint*)p)->print();
+
+}
+
+void checkparallelogram() {
+    // Parallelogram par;
+
+    // par.print();
+
+    Point p1(1, 3);
+
+    Parallelogram par1(p1, p1, p1, p1);
+    Parallelogram par2(par1);
+    // p1.print();
+
+    
+}
+
+
 int main() {
     // checkPoint();
-    checkLine();
+    // checkLine();
+    // colorPointCheck();
+    checkparallelogram();
 
 }
 

@@ -6,7 +6,7 @@ class Point {
         Point() : _x(0), _y(0) {
             std::cout << "default constructor Point: " << '\n';
         }
-        Point(int x, int y) : _x(x), _y(y) {
+        Point(const int &x, const int &y) : _x(x), _y(y) {
             std::cout << "init constructor Point: x=" << _x << ", y=" << _y << '\n';
         }
         Point(const Point &p) {
@@ -21,16 +21,20 @@ class Point {
         int getY() {
             return _y;
         }
-        void set(const int x, const int y) {
+        void set(const int &x, const int &y) {
             this->_x = x;
             this->_y = y;
         }
 
-        ~Point() {
-            std::cout << "destructor: x=" << _x << ", y=" << _y << '\n';
+        void print() {
+            std::cout << "point" << '\n';
         }
 
-    private:
+        ~Point() {
+            std::cout << "destructor Point: x=" << _x << ", y=" << _y << '\n';
+        }
+
+    protected:
         int _x;
         int _y;
 
