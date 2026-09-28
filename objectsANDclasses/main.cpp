@@ -1,5 +1,7 @@
 #include <iostream>
 #include "classes/point.h"
+#include "classes/line.h"
+
 
 void checkCopyPoint(Point p) {}
 
@@ -39,8 +41,31 @@ void checkPoint() {
     std::cout << "end" << '\n';
 }
 
+void checkLine() {
+    std::cout << "\n=============checkLine============\n\n";
+
+    Point p1;
+    Point *p2 = new Point(1, 0);
+
+    Line l;
+
+    if (l.getP1() == nullptr && l.getP2() == nullptr) {
+        std::cout << "ura" << '\n';
+    }
+
+    Line l1(&p1, p2);
+    l1.print();
+
+    Point p3(3, 4);
+
+    l1.set(l1.getP1(), &p3);
+
+    l1.print();
+}
+
 int main() {
-    checkPoint();
+    // checkPoint();
+    checkLine();
 
 }
 
