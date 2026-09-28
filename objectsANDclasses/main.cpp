@@ -1,0 +1,106 @@
+#include <iostream>
+#include "classes/point.h"
+#include "classes/line.h"
+#include "classes/color_point.h"
+#include "classes/parallelogram.h"
+
+
+void checkCopyPoint(Point p) {}
+
+void checkPoint() {
+    std::cout << "\n=============checkPoint============\n\n";
+
+    Point p;
+    std::cout << "p: " << p.getX() << ", " << p.getY() << '\n';
+
+    Point p1(10, 20);
+    std::cout << "p1: " << p1.getX() << ", " << p1.getY() << '\n';
+
+    Point p2(p1);
+    std::cout << "p2: " << p2.getX() << ", " << p2.getY() << '\n';
+
+    p2.set(15, 30);
+    std::cout << "p1: " << p1.getX() << ", " << p1.getY() << '\n';
+    std::cout << "p2: " << p2.getX() << ", " << p2.getY() << '\n';
+
+    checkCopyPoint(p);
+
+    Point *pp1 = new Point();
+    std::cout << "pp1: " << pp1->getX() << ", " << pp1->getY() << '\n';
+
+    delete pp1;
+
+    Point *pp2 = new Point(1, 3);
+    std::cout << "pp2: " << pp2->getX() << ", " << pp2->getY() << '\n';
+
+    Point *pp3 = new Point(*pp2);
+    std::cout << "pp3: " << pp3->getX() << ", " << pp3->getY() << '\n';
+
+    checkCopyPoint(*pp2);
+
+    delete pp2;
+    delete pp3;
+    std::cout << "end" << '\n';
+}
+
+void checkLine() {
+    std::cout << "\n=============checkLine============\n\n";
+
+    Point p1;
+    Point *p2 = new Point(1, 0);
+
+    Line l;
+
+    if (l.getP1() == nullptr && l.getP2() == nullptr) {
+        std::cout << "ura" << '\n';
+    }
+
+    Line l1(&p1, p2);
+    l1.print();
+
+    Point p3(3, 4);
+
+    l1.set(l1.getP1(), &p3);
+
+    l1.print();
+}
+
+void colorPointCheck() {
+    ColorPoint cp("red", 1, 2);
+
+    cp.print();
+
+    cp.setCollor("blue");
+
+    cp.print();
+
+    Point *p = new ColorPoint("red", 1, 2);
+
+    p->print();
+
+    ((ColorPoint*)p)->print();
+
+}
+
+void checkparallelogram() {
+    // Parallelogram par;
+
+    // par.print();
+
+    Point p1(1, 3);
+
+    Parallelogram par1(p1, p1, p1, p1);
+    Parallelogram par2(par1);
+    // p1.print();
+
+    
+}
+
+
+int main() {
+    // checkPoint();
+    // checkLine();
+    // colorPointCheck();
+    checkparallelogram();
+}
+
