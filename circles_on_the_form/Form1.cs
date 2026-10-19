@@ -13,26 +13,7 @@ namespace circles_on_the_form
             for (int i = 0; i < storage.GetLength(); i++)
             {
                 CCircle circle = storage.Get(i);
-                if (circle.IsSelected)
-                {
-                    e.Graphics.DrawEllipse(
-                        Pens.Blue,
-                        circle.x - CCircle.radius,
-                        circle.y - CCircle.radius,
-                        CCircle.radius * 2,
-                        CCircle.radius * 2
-                    );
-                }
-                else
-                {
-                    e.Graphics.DrawEllipse(
-                        Pens.Black,
-                        circle.x - CCircle.radius,
-                        circle.y - CCircle.radius,
-                        CCircle.radius * 2,
-                        CCircle.radius * 2
-                    );
-                }
+                circle.Drow(e.Graphics);
             }
         }
 

@@ -28,6 +28,29 @@ namespace circles_on_the_form
                 return true;
             }
             return false;
-        }        
+        }
+        public void Drow(Graphics g)
+        {
+            if (IsSelected)
+            {
+                g.DrawEllipse(
+                    Pens.Blue,
+                    x - CCircle.radius,
+                    y - CCircle.radius,
+                    CCircle.radius * 2,
+                    CCircle.radius * 2
+                );
+            }
+            else
+            {
+                g.DrawEllipse(
+                    Pens.Black,
+                    x - CCircle.radius,
+                    y - CCircle.radius,
+                    CCircle.radius * 2,
+                    CCircle.radius * 2
+                );
+            }
+        }
     }
 }
