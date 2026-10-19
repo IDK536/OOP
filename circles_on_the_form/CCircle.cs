@@ -9,11 +9,10 @@ namespace circles_on_the_form
     internal class CCircle
     {
         public int x { get; private set; }
-        public int y { get; private set;}
-        const int radius = 15;
+        public int y { get; private set; }
+        public const int radius = 50;
 
         public bool IsSelected { get; set; } = false;
-
         public CCircle(int x, int y)
         {
             this.x = x;
@@ -25,8 +24,7 @@ namespace circles_on_the_form
             int distance = (x - this.x) * (x - this.x) + (y - this.y) * (y - this.y);
 
             if (distance < radius * radius)
-            {
-                IsSelected = true;
+            { 
                 return true;
             }
             return false;

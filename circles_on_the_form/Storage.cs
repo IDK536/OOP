@@ -8,16 +8,22 @@ namespace circles_on_the_form
 {
     internal class Storage
     {
-        private List <CCircle> circles;
+        private List<CCircle> circles = new List<CCircle>();
 
-        void Add(CCircle circle)
+        public void Add(CCircle circle)
         {
             circles.Add(circle);
+        }
+
+        public int GetLength()
+        {
+            return circles.Count;
         }
 
         public void Remove(CCircle circle)
         {
             circles.Remove(circle);
+            circles.RemoveAll(t => t.IsSelected);
         }
 
         public CCircle Get(int key) 
@@ -27,31 +33,6 @@ namespace circles_on_the_form
 
         public void Select(int x, int y, bool isCtrl)
         {
-            if (isCtrl)
-            {
-                foreach (CCircle circle in circles)
-                {
-                    if (circle.In(x, y))
-                    {
-                        circle.IsSelected = true;
-                        break;
-                    }
-                }
-            }
-            else 
-            {
-                foreach (CCircle circle in circles)
-                {
-                    if (circle.In(x, y))
-                    {
-                        circle.IsSelected = true;
-                    }
-                    else
-                    {
-                        circle.IsSelected = false;
-                    }
-                }
-            }
         }
 
         public void DeleteSelected()
