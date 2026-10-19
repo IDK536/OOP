@@ -44,8 +44,6 @@ namespace circles_on_the_form
                 isCtrl = true;
             }
 
-
-
             bool isSelected = false;
             if (isCtrl)
             {
@@ -99,7 +97,15 @@ namespace circles_on_the_form
             if (e.KeyCode == Keys.Delete)
             {
 
-                storage.Remove();
+                for (int i = 0; i < storage.GetLength(); i++)
+                {
+                    CCircle circle = storage.Get(i);
+                    if (circle.IsSelected)
+                    {
+                        storage.Remove(circle);
+                        i--;
+                    }
+                }
                 Invalidate();
             }
         }
