@@ -108,13 +108,19 @@ namespace MVC
             bool isParse;
 
             isParse = int.TryParse(nums[0], out int valueA);
-            if (isParse) A = valueA;
+            if (!isParse) return;
 
             isParse = int.TryParse(nums[1], out int valueB);
-            if (isParse) B = valueB;
+            if (!isParse) return;
 
             isParse = int.TryParse(nums[2], out int valueC);
-            if (isParse) C = valueC;
+            if (!isParse) return;
+
+            C = valueC;
+
+            A = valueA;
+
+            B = valueB;
         }
 
         public void Save()
