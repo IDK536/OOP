@@ -19,7 +19,7 @@ namespace MVC
         private int c = 0;
 
 
-        public event EventHandler? ShowEvent;
+        public event EventHandler? ChangeEvent;
 
 
         public int A { 
@@ -93,7 +93,7 @@ namespace MVC
 
         public void Show()
         {
-            ShowEvent?.Invoke(this, EventArgs.Empty);
+            ChangeEvent?.Invoke(this, EventArgs.Empty);
         }
 
         public void Load() 

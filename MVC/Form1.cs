@@ -13,7 +13,7 @@ namespace MVC
 
             InitializeComponent();
 
-            numbers.ShowEvent += Show;
+            numbers.ChangeEvent += Show;
             numbers.Show();
         }
 
