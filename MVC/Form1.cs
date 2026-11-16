@@ -4,6 +4,7 @@ namespace MVC
 {
     public partial class Form1 : Form
     {
+        bool isUpdate = false; 
         Numbers numbers;
         public Form1()
         {
@@ -28,17 +29,22 @@ namespace MVC
 
         private void Show(object? sender, EventArgs e)
         {
+            if (isUpdate) return;
+            isUpdate = true;
+
             textBox1.Text = numbers.A.ToString();
             textBox2.Text = numbers.B.ToString();
             textBox3.Text = numbers.C.ToString();
 
-            numericUpDown1.Text = numbers.A.ToString();
-            numericUpDown2.Text = numbers.B.ToString();
-            numericUpDown3.Text = numbers.C.ToString();
+            numericUpDown1.Value = numbers.A;
+            numericUpDown2.Value = numbers.B;
+            numericUpDown3.Value = numbers.C;
 
             trackBar1.Value = numbers.A;
             trackBar2.Value = numbers.B;
             trackBar3.Value = numbers.C;
+
+            isUpdate = false;
         }
 
         private void textBox1_Leave(object sender, EventArgs e)
@@ -86,33 +92,25 @@ namespace MVC
 
         private void trackBar1_ValueChanged(object sender, EventArgs e)
         {
+            if (isUpdate) return;
+
             numbers.A = trackBar1.Value;
         }
 
         private void trackBar2_ValueChanged(object sender, EventArgs e)
         {
+            if (isUpdate) return;
+
             numbers.B = trackBar2.Value;
         }
 
         private void trackBar3_ValueChanged(object sender, EventArgs e)
         {
+            if (isUpdate) return;
+
             numbers.C = trackBar3.Value;
         }
 
-        //private void trackBar1_Leave(object sender, EventArgs e)
-        //{
-        //    numbers.A = trackBar1.Value;
-        //}
-
-        //private void trackBar2_Leave(object sender, EventArgs e)
-        //{
-        //    numbers.B = trackBar2.Value;
-        //}
-
-        //private void trackBar3_Leave(object sender, EventArgs e)
-        //{
-        //    numbers.C = trackBar3.Value;
-        //}
 
         private void Form1_Closing(object sender, EventArgs e)
         {

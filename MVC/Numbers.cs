@@ -27,14 +27,14 @@ namespace MVC
              {
                 if (down <= value && top >= value)
                 {
-                    if (value > B)
+                    if (value > b)
                     {
-                        B = value;
+                        b = value;
                     }
 
-                    if (value > C) 
+                    if (value > c) 
                     { 
-                        C = value;
+                        c = value;
                     }
 
                     a = value;
@@ -52,7 +52,7 @@ namespace MVC
         {
             set
             {
-                if (A <= value && value <= C)
+                if (a <= value && value <= c)
                 {
                     b = value;
                 }
@@ -70,14 +70,14 @@ namespace MVC
             {
                 if (down <= value && top >= value)
                 {
-                    if (B > value)
+                    if (b > value)
                     {
-                        B = value;
+                        b = value;
                     }
                     
-                    if (A > value)
+                    if (a > value)
                     {
-                        A = value;
+                        a = value;
                     }
                         c = value;
                 }
@@ -103,16 +103,18 @@ namespace MVC
             string text = File.ReadAllText(fileName);
             string[] nums = text.Split('\n');
 
+            if (nums.Length != 3) return;
+
             bool isParse;
 
             isParse = int.TryParse(nums[0], out int valueA);
-            if (isParse) a = valueA;
+            if (isParse) A = valueA;
 
             isParse = int.TryParse(nums[1], out int valueB);
-            if (isParse) b = valueB;
+            if (isParse) B = valueB;
 
             isParse = int.TryParse(nums[2], out int valueC);
-            if (isParse) c = valueC;
+            if (isParse) C = valueC;
         }
 
         public void Save()
