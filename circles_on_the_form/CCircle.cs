@@ -6,20 +6,18 @@ using System.Threading.Tasks;
 
 namespace circles_on_the_form
 {
-    internal class CCircle
+    internal class CCircle: CShape
     {
-        public int x { get; private set; }
-        public int y { get; private set; }
+
         public const int radius = 50;
 
-        public bool IsSelected { get; set; } = false;
         public CCircle(int x, int y)
         {
             this.x = x;
             this.y = y;
         }
 
-        public bool In(int x, int y)
+        public override bool In(int x, int y)
         {
             int distance = (x - this.x) * (x - this.x) + (y - this.y) * (y - this.y);
 
@@ -29,7 +27,7 @@ namespace circles_on_the_form
             }
             return false;
         }
-        public void Drow(Graphics g)
+        public override void Drow(Graphics g)
         {
             if (IsSelected)
             {
