@@ -36,9 +36,9 @@ namespace MVC
             textBox2.Text = numbers.B.ToString();
             textBox3.Text = numbers.C.ToString();
 
-            numericUpDown1.Value = numbers.A;
-            numericUpDown2.Value = numbers.B;
-            numericUpDown3.Value = numbers.C;
+            numericUpDown1.Text = numbers.A.ToString();
+            numericUpDown2.Text = numbers.B.ToString();
+            numericUpDown3.Text = numbers.C.ToString();
 
             trackBar1.Value = numbers.A;
             trackBar2.Value = numbers.B;
