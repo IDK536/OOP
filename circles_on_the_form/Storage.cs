@@ -8,26 +8,26 @@ namespace circles_on_the_form
 {
     internal class Storage
     {
-        private List<CCircle> circles = new List<CCircle>();
+        private List<CShape> shapes = new List<CShape>();
 
-        public void Add(CCircle circle)
+        public void Add(CShape shape)
         {
-            circles.Add(circle);
+            shapes.Add(shape);
         }
 
         public int GetLength()
         {
-            return circles.Count;
+            return shapes.Count;
         }
 
-        public void Remove(CCircle circle)
+        public void Remove(CShape shape)
         {
-            circles.Remove(circle);
+            shapes.Remove(shape);
         }
 
-        public CCircle Get(int key) 
+        public CShape Get(int key) 
         {
-            return circles[key];
+            return shapes[key];
         }        
     }
 }

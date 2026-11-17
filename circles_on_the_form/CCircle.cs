@@ -13,13 +13,13 @@ namespace circles_on_the_form
 
         public CCircle(int x, int y)
         {
-            this.x = x;
-            this.y = y;
+            this.point.X = x;
+            this.point.Y = y;
         }
 
         public override bool In(int x, int y)
         {
-            int distance = (x - this.x) * (x - this.x) + (y - this.y) * (y - this.y);
+            int distance = (x - this.point.X) * (x - this.point.X) + (y - this.point.Y) * (y - this.point.Y);
 
             if (distance < radius * radius)
             { 
@@ -27,14 +27,14 @@ namespace circles_on_the_form
             }
             return false;
         }
-        public override void Drow(Graphics g)
+        public override void Draw(Graphics g)
         {
             if (IsSelected)
             {
                 g.DrawEllipse(
                     Pens.Blue,
-                    x - CCircle.radius,
-                    y - CCircle.radius,
+                    point.X - CCircle.radius,
+                    point.Y -CCircle.radius,
                     CCircle.radius * 2,
                     CCircle.radius * 2
                 );
@@ -43,8 +43,8 @@ namespace circles_on_the_form
             {
                 g.DrawEllipse(
                     Pens.Black,
-                    x - CCircle.radius,
-                    y - CCircle.radius,
+                    point.X - CCircle.radius,
+                    point.Y - CCircle.radius,
                     CCircle.radius * 2,
                     CCircle.radius * 2
                 );
