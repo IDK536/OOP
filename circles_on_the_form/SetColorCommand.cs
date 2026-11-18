@@ -19,10 +19,11 @@ namespace circles_on_the_form
 
         public override void Execute(List<CShape> shapes)
         {
-            selections = shapes;
+            selections = new List<CShape>(shapes);
+            prevColors = new List<Color>(shapes.Count);
             for (int i = 0; i < shapes.Count; i++)
             {
-                prevColors[i] = shapes[i].color;
+                prevColors.Add(shapes[i].color);
                 shapes[i].color = color;
             }
         }

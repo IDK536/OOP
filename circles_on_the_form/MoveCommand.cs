@@ -20,7 +20,7 @@ namespace circles_on_the_form
 
         public override void Execute(List<CShape> shapes)
         {
-            selections = shapes;
+            selections = new List<CShape>(shapes);
 
             for (int i = 0; i < shapes.Count; i++)
             {

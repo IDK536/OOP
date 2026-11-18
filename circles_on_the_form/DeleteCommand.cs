@@ -9,8 +9,8 @@ namespace circles_on_the_form
 {
     internal class DeleteCommand: Command
     {
-
         private List<CShape> shapes;
+
         private List<CShape> selections;
 
         public DeleteCommand(List<CShape> shapes)
@@ -20,8 +20,10 @@ namespace circles_on_the_form
 
         public override void Execute(List<CShape> shapes)
         {
-            selections = shapes;
-            this.shapes.RemoveAll(shape => shape.IsSelected);
+            selections = new List<CShape>(shapes);
+            for (int i = 0; i < selections.Count; i++) {
+                this.shapes.Remove(selections[i]);
+            }
         }
 
         public override void UnExecute()
@@ -35,7 +37,5 @@ namespace circles_on_the_form
         {
             return new DeleteCommand(shapes);
         }
-
-
     }
 }
