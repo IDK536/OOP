@@ -14,7 +14,7 @@ namespace MVC
             InitializeComponent();
 
             numbers.ChangeEvent += Show;
-            numbers.Show();
+            Show();
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)

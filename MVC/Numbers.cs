@@ -40,7 +40,7 @@ namespace MVC
                     a = value;
                 }
 
-                Show();
+                Push();
              }
             get
             {
@@ -57,7 +57,7 @@ namespace MVC
                     b = value;
                 }
 
-                Show();
+                Push();
             }
             get
             {
@@ -81,8 +81,8 @@ namespace MVC
                     }
                         c = value;
                 }
-                    
-                Show();
+
+                Push();
             }
             get
             {
@@ -91,7 +91,7 @@ namespace MVC
             
         }
 
-        public void Show()
+        public void Push()
         {
             ChangeEvent?.Invoke(this, EventArgs.Empty);
         }
