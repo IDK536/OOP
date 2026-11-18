@@ -9,7 +9,7 @@ namespace circles_on_the_form
     internal class CCircle: CShape
     {
 
-        public const int radius = 50;
+        public int radius = 50;
 
         public CCircle(int x, int y)
         {

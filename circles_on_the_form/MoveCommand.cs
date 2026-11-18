@@ -11,7 +11,7 @@ namespace circles_on_the_form
         private int deltaX;
         private int deltaY;
 
-        private CShape selection;
+        private CShape? selection;
         public MoveCommand(int deltaX, int deltaY)
         {
             this.deltaX = deltaX;

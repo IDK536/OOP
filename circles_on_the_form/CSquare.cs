@@ -30,22 +30,22 @@ namespace circles_on_the_form
         {
             if (IsSelected)
             {
-                g.DrawRectangle(
+                g.DrawEllipse(
                     Pens.Blue,
-                    point.X,
-                    point.Y,
-                    width,
-                    width
+                    point.X - CCircle.radius,
+                    point.Y - CCircle.radius,
+                    CCircle.radius * 2,
+                    CCircle.radius * 2
                 );
             }
             else
             {
-                g.DrawRectangle(
+                g.DrawEllipse(
                     Pens.Black,
-                    point.X,
-                    point.Y,
-                    width,
-                    width
+                    point.X - CCircle.radius,
+                    point.Y - CCircle.radius,
+                    CCircle.radius * 2,
+                    CCircle.radius * 2
                 );
             }
         }
