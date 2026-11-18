@@ -8,15 +8,29 @@ namespace circles_on_the_form
 {
     internal class ScaleCommand: Command
     {
-        private float scale; 
-        public ScaleCommand(float scale)
+        private int scale; 
+            
+        private CShape? selection;
+
+        public ScaleCommand(int scale)
         {
             this.scale = scale;
         }
 
         public override void Execute(CShape shape)
-        { 
+        {
+            selection = shape;
+            shape.Scale(scale);
+        }
 
+        public override void UnExecute()
+        {
+            selection.Scale(-scale);
+        }
+
+        public override Command Clone()
+        {
+            return new ScaleCommand(scale);
         }
 
     }

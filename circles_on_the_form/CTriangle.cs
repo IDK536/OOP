@@ -9,13 +9,21 @@ namespace circles_on_the_form
     internal class CTriangle: CShape
     {
         private int radius = 40;
-        PointF[] points;
+        Point[] points = new Point[3];
+
+        public CTriangle(int x, int y) 
+        {
+            point.X = x;
+            point.Y = y;
+            UpdatePoints();
+        }
 
         public override bool In(int x, int y)
         {
-            double a = Cross(t[0], t[1], p);
-            double b = Cross(t[1], t[2], p);
-            double c = Cross(t[2], t[0], p);
+            PointF p = new PointF(x, y);
+            double a = Cross(points[0], points[1], p);
+            double b = Cross(points[1], points[2], p);
+            double c = Cross(points[2], points[0], p);
 
             bool negative = a < 0 || b < 0 || c < 0;
             bool positive = a > 0 || b > 0 || c > 0;
@@ -40,22 +48,24 @@ namespace circles_on_the_form
             }
         }
 
+        public override void Scale(int scale)
+        {
+            radius += scale;
+        }
 
 
-        private double Cross(Point a, Point b, Point p)
+
+        private double Cross(PointF a, PointF b, PointF p)
         {
             return (b.X - a.X) * (p.Y - a.Y)
                  - (b.Y - a.Y) * (p.X - a.X);
         }
 
-        private PointF[] GetPoints()
+        private void UpdatePoints()
         {
-            PointF[] points = new PointF[3];
-            points[0] = new PointF(point.X, point.Y - radius);
-            points[1] = new PointF(point.X - radius, point.Y + radius / 2);
-            points[2] = new PointF(point.X + radius, int.Y + radius / 2);
-
-            return points;
+            points[0] = new Point(point.X, point.Y - radius);
+            points[1] = new Point(point.X - radius, point.Y + radius / 2);
+            points[2] = new Point(point.X + radius, point.Y + radius / 2);
         }
     }
 }

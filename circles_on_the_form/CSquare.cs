@@ -9,11 +9,13 @@ namespace circles_on_the_form
     internal class CSquare: CShape
     {
         private int width = 100;
+        private Point[] points = new Point[4];
 
         public CSquare(int x, int y)
         {
             this.point.X = x;
             this.point.Y = y;
+            UpdatePoints();
         }
 
         public override bool In(int x, int y)
@@ -30,24 +32,34 @@ namespace circles_on_the_form
         {
             if (IsSelected)
             {
-                g.DrawEllipse(
+                g.DrawPolygon(
                     Pens.Blue,
-                    point.X - CCircle.radius,
-                    point.Y - CCircle.radius,
-                    CCircle.radius * 2,
-                    CCircle.radius * 2
+                    points
                 );
             }
             else
             {
-                g.DrawEllipse(
+                g.DrawPolygon(
                     Pens.Black,
-                    point.X - CCircle.radius,
-                    point.Y - CCircle.radius,
-                    CCircle.radius * 2,
-                    CCircle.radius * 2
+                    points
                 );
             }
         }
+
+        public override void Scale(int scale)
+        {
+            width *= scale;
+            UpdatePoints();
+        }
+
+        private void UpdatePoints()
+        {
+            points[0] = new Point(this.point.X - width / 2, this.point.Y - width / 2);
+            points[1] = new Point(this.point.X + width / 2, this.point.Y - width / 2);
+            points[2] = new Point(this.point.X - width / 2, this.point.Y + width / 2);
+            points[3] = new Point(this.point.X + width / 2, this.point.Y + width / 2);
+
+        }
+
     }
 }

@@ -33,22 +33,27 @@ namespace circles_on_the_form
             {
                 g.DrawEllipse(
                     Pens.Blue,
-                    point.X - CCircle.radius,
-                    point.Y -CCircle.radius,
-                    CCircle.radius * 2,
-                    CCircle.radius * 2
+                    point.X - radius,
+                    point.Y - radius,
+                    radius * 2,
+                    radius * 2
                 );
             }
             else
             {
                 g.DrawEllipse(
                     Pens.Black,
-                    point.X - CCircle.radius,
-                    point.Y - CCircle.radius,
-                    CCircle.radius * 2,
-                    CCircle.radius * 2
+                    point.X - radius,
+                    point.Y - radius,
+                    radius * 2,
+                    radius * 2
                 );
             }
+        }
+
+        public override void Scale(int scale)
+        {
+            radius += scale;
         }
     }
 }

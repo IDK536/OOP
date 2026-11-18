@@ -11,23 +11,30 @@ namespace circles_on_the_form
         private int deltaX;
         private int deltaY;
 
-        private CShape? selection;
+        private List<CShape> selections;
         public MoveCommand(int deltaX, int deltaY)
         {
             this.deltaX = deltaX;
             this.deltaY = deltaY;
         }
 
-        public override void Execute(CShape shape)
+        public override void Execute(List<CShape> shapes)
         {
-            selection = shape;
-            shape.Move(deltaX, deltaY);
+            selections = shapes;
+
+            for (int i = 0; i < shapes.Count; i++)
+            {
+                shapes[i].Move(deltaX, deltaY);
+            }
         }
 
         public override void UnExecute()
         {
-            selection.Move(-deltaX, -deltaY);
+            for (int i = 0; i < selections.Count; i++)
+            {
+                selections[i].Move(-deltaX, -deltaY);
 
+            }
         }
 
         public override Command Clone()
