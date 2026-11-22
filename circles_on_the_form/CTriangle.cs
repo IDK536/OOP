@@ -31,20 +31,13 @@ namespace circles_on_the_form
             return !(negative && positive);
         }
 
-        public override bool InWindow(int bottomBorder, int rightBorder)
+        public override Rectangle GetBounds()
         {
             int left = point.X - radius;
-            int right = point.X + radius;
             int top = point.Y - radius;
-            int bottom = point.Y + radius;
+            Rectangle bounds = new Rectangle(left, top, radius * 2, radius + radius / 2);
 
-
-            if (left >= 0 && right <= rightBorder &&
-                top >= 0 && bottom <= bottomBorder)
-            {
-                return true;
-            }
-            return false;
+            return bounds;
         }
 
         public override void Draw(Graphics g)
