@@ -42,7 +42,7 @@ namespace circles_on_the_form
             else
             {
                 g.DrawEllipse(
-                    Pens.Black,
+                    new Pen(color),
                     point.X - radius,
                     point.Y - radius,
                     radius * 2,
@@ -54,6 +54,12 @@ namespace circles_on_the_form
         public override void Scale(int scale)
         {
             radius += scale;
+        }
+
+        public override void Move(int deltaX, int deltaY)
+        {
+            point.X += deltaX;
+            point.Y += deltaY;
         }
     }
 }

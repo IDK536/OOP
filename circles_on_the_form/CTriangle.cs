@@ -42,7 +42,7 @@ namespace circles_on_the_form
             else
             {
                 g.DrawPolygon(
-                    Pens.Black,
+                    new Pen(color),
                     points
                 );
             }
@@ -51,6 +51,14 @@ namespace circles_on_the_form
         public override void Scale(int scale)
         {
             radius += scale;
+            UpdatePoints();
+        }
+
+        public override void Move(int deltaX, int deltaY)
+        {
+            point.X += deltaX;
+            point.Y += deltaY;
+            UpdatePoints();
         }
 
 

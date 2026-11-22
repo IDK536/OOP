@@ -2,93 +2,93 @@ namespace circles_on_the_form
 {
     public partial class Form1 : Form
     {
-        Storage storage = new Storage();
+        private const int move = 10;
+        private const int scale = 10;
+
+        Storage storage = new Storage(1);
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void Form1_Paint(object sender, PaintEventArgs e)
+        private void Panel1_Paint(object sender, PaintEventArgs e)
         {
-            for (int i = 0; i < storage.GetLength(); i++)
-            {
-                CCircle circle = storage.Get(i);
-                circle.Drow(e.Graphics);
-            }
+            storage.Show(e.Graphics);
         }
 
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        private void Panel1_MouseDown(object sender, MouseEventArgs e)
         {
-            bool isCtrl = false;
-            if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+            bool isCtrl = (Control.ModifierKeys & Keys.Control) == Keys.Control;
+
+            if (!storage.Select(e.X, e.Y, isCtrl))
             {
-                isCtrl = true;
+                storage.Draw(e.X, e.Y);
             }
 
-            bool isSelected = false;
-            if (isCtrl)
-            {
-                for (int i = 0; i < storage.GetLength(); i++)
-                {
-                    CCircle circle = storage.Get(i);
-                    if (circle.In(e.X, e.Y))
-                    {
-                        circle.IsSelected = true;
-                        isSelected = true;
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                for (int i = 0; i < storage.GetLength(); i++)
-                {
-                    CCircle circle = storage.Get(i);
-
-                    if (circle.In(e.X, e.Y))
-                    {
-                        if (!isSelected)
-                        {
-                            circle.IsSelected = true;
-                        }
-                        else
-                        {
-                            circle.IsSelected = false;
-                        }
-                        isSelected = true;
-                    }
-                    else
-                    {
-                        circle.IsSelected = false;
-                    }
-                }
-            }
-
-            if (!isSelected)
-            {
-                CCircle newCircle = new CCircle(e.X, e.Y);
-                storage.Add(newCircle);
-            }
-
-            Invalidate();
+            panel1.Invalidate();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete)
+            if (e.KeyCode == Keys.D1)
             {
-
-                for (int i = 0; i < storage.GetLength(); i++)
-                {
-                    CCircle circle = storage.Get(i);
-                    if (circle.IsSelected)
-                    {
-                        storage.Remove(circle);
-                        i--;
-                    }
-                }
-                Invalidate();
+                storage.SwitchTyep(0);
             }
+            else if (e.KeyCode == Keys.D2)
+            {
+                storage.SwitchTyep(1);
+            }
+            else if (e.KeyCode == Keys.D3)
+            {
+                storage.SwitchTyep(2);
+            }
+            else if (e.KeyCode == Keys.R)
+            {
+                ColorDialog dialog = new ColorDialog();
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    storage.SetColor(dialog.Color);
+                }
+
+                panel1.Invalidate();
+            }
+            else if (e.KeyCode == Keys.Delete)
+            {
+                storage.Remove();
+                panel1.Invalidate();
+            }
+            else if (e.KeyCode == Keys.Q)
+            {
+                storage.Scale(scale);
+                panel1.Invalidate();
+            }
+            else if (e.KeyCode == Keys.A)
+            {
+                storage.Move(-move, 0);
+                panel1.Invalidate();
+            }
+            else if (e.KeyCode == Keys.D)
+            {
+                storage.Move(move, 0);
+                panel1.Invalidate();
+            }
+            else if (e.KeyCode == Keys.W)
+            {
+                storage.Move(0, -move);
+                panel1.Invalidate();
+            }
+            else if (e.KeyCode == Keys.S)
+            {
+                storage.Move(0, move);
+                panel1.Invalidate();
+            }
+            else if (e.KeyCode == Keys.Z)
+            {
+                storage.Undo();
+                panel1.Invalidate();
+            }
+
+
         }
     }
 }

@@ -8,7 +8,13 @@ namespace circles_on_the_form
 {
     internal class SelectCommand: Command
     {
+        private bool select;
         private List<CShape> selections;
+
+        public SelectCommand(bool select)
+        {
+            this.select = select;
+        }
 
         public override void Execute(List<CShape> shapes)
         {
@@ -16,7 +22,7 @@ namespace circles_on_the_form
 
             for (int i = 0; i < shapes.Count; i++)
             {
-                shapes[i].IsSelected = true;
+                shapes[i].IsSelected = select;
             }
         }
 
@@ -24,13 +30,13 @@ namespace circles_on_the_form
         {
             for (int i = 0; i < selections.Count; i++)
             {
-                selections[i].IsSelected = false;
+                selections[i].IsSelected = !select;
             }
         }
 
         public override Command Clone()
         {
-            return new SelectCommand();
+            return new SelectCommand(select);
         }
     }
 }

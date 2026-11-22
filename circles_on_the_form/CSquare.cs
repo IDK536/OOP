@@ -40,7 +40,7 @@ namespace circles_on_the_form
             else
             {
                 g.DrawPolygon(
-                    Pens.Black,
+                    new Pen(color),
                     points
                 );
             }
@@ -48,16 +48,24 @@ namespace circles_on_the_form
 
         public override void Scale(int scale)
         {
-            width *= scale;
+            width += scale;
             UpdatePoints();
         }
+
+        public override void Move(int deltaX, int deltaY)
+        {
+            point.X += deltaX;
+            point.Y += deltaY;
+            UpdatePoints();
+        }
+
 
         private void UpdatePoints()
         {
             points[0] = new Point(this.point.X - width / 2, this.point.Y - width / 2);
             points[1] = new Point(this.point.X + width / 2, this.point.Y - width / 2);
-            points[2] = new Point(this.point.X - width / 2, this.point.Y + width / 2);
-            points[3] = new Point(this.point.X + width / 2, this.point.Y + width / 2);
+            points[2] = new Point(this.point.X + width / 2, this.point.Y + width / 2);
+            points[3] = new Point(this.point.X - width / 2, this.point.Y + width / 2);
 
         }
 
