@@ -36,11 +36,6 @@ namespace circles_on_the_form
             {
                 shapes.Insert(index, selection);
             }
-        }
-
-        public override Command Clone()
-        {
-            return new DeleteCommand(shapes);
-        }
+        } 
     }
 }

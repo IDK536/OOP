@@ -28,11 +28,5 @@ namespace circles_on_the_form
         {
             selection.Scale(-scale);
         }
-
-        public override Command Clone()
-        {
-            return new ScaleCommand(scale);
-        }
-
     }
 }

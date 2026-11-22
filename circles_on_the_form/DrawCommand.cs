@@ -28,10 +28,5 @@ namespace circles_on_the_form
         {
             shapes.Remove(selection);
         }
-
-        public override Command Clone()
-        {
-            return new DrawCommand(shapes);
-        }
     }
 }

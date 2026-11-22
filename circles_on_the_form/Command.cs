@@ -10,6 +10,5 @@ namespace circles_on_the_form
     {
         abstract public void Execute(CShape shape);
         abstract public void UnExecute();
-        abstract public Command Clone();
     }
 }

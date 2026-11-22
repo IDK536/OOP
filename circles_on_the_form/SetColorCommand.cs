@@ -29,11 +29,5 @@ namespace circles_on_the_form
         {
             selection.color = prevColor;
         }
-
-        public override Command Clone()
-        {
-            return new SetColorCommand(color);
-        }
-
     }
 }

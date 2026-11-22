@@ -27,10 +27,5 @@ namespace circles_on_the_form
         {
             selection.IsSelected = !select;
         }
-
-        public override Command Clone()
-        {
-            return new SelectCommand(select);
-        }
     }
 }

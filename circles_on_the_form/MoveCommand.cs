@@ -29,10 +29,5 @@ namespace circles_on_the_form
         {
             selection.Move(-deltaX, -deltaY);
         }
-
-        public override Command Clone()
-        {
-            return new MoveCommand(deltaX, deltaY);
-        }
     }
 }
