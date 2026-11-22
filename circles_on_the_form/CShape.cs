@@ -16,8 +16,8 @@ namespace circles_on_the_form
         public bool InWindow(int bottomBorder, int rightBorder)
         {
             Rectangle shapeBounds = GetBounds();
-            if (shapeBounds.Left >= 0 && shapeBounds.Right <= rightBorder &&
-                shapeBounds.Top >= 0 && shapeBounds.Bottom <= bottomBorder)
+            if (Math.Abs(shapeBounds.Left) >= 0 && Math.Abs(shapeBounds.Right) <= rightBorder &&
+                Math.Abs(shapeBounds.Top) >= 0 && Math.Abs(shapeBounds.Bottom) <= bottomBorder)
             {
                 return true;
             }
