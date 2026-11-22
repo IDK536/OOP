@@ -8,7 +8,7 @@ namespace circles_on_the_form
 {
     abstract class Command
     {
-        abstract public void Execute(List<CShape> shape);
+        abstract public void Execute(CShape shape);
         abstract public void UnExecute();
         abstract public Command Clone();
     }

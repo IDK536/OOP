@@ -10,34 +10,23 @@ namespace circles_on_the_form
     {
         private List<CShape> shapes;
 
-        private List<CShape> selections;
+        private CShape selection;
 
         public DrawCommand(List<CShape> shapes)
         {
             this.shapes = shapes;
         }
 
-        public override void Execute(List<CShape> shapes)
+        public override void Execute(CShape shape)
         {
-            selections = new List<CShape>(shapes);
-            for (int i = 0; i < shapes.Count; i++)
-            {
-                this.shapes.Add(shapes[i]);
-            }
-        }
+            selection = shape;
 
-        public void Execute(CShape shape)
-        {
-            selections = new List<CShape> { shape };
-            this.shapes.Add(shape);
+            shapes.Add(shape);
         }
 
         public override void UnExecute()
         {
-            for (int i = 0; i < selections.Count; i++)
-            {
-                this.shapes.Remove(selections[i]);
-            }
+            shapes.Remove(selection);
         }
 
         public override Command Clone()

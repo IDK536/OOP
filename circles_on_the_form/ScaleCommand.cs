@@ -10,28 +10,23 @@ namespace circles_on_the_form
     {
         private int scale; 
             
-        private List<CShape> selections;
+        private CShape selection;
 
         public ScaleCommand(int scale)
         {
             this.scale = scale;
         }
 
-        public override void Execute(List<CShape> shapes)
+        public override void Execute(CShape shape)
         {
-            selections = new List<CShape>(shapes);
-            for (int i = 0; i < shapes.Count; i++)
-            {
-                shapes[i].Scale(scale);
-            }
+            selection = shape;
+
+            shape.Scale(scale);
         }
 
         public override void UnExecute()
         {
-            for (int i = 0; i < selections.Count; i++)
-            {
-                selections[i].Scale(-scale);
-            }
+            selection.Scale(-scale);
         }
 
         public override Command Clone()

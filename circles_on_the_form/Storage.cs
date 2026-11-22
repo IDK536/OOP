@@ -9,7 +9,7 @@ namespace circles_on_the_form
     internal class Storage
     {
         private List<CShape> shapes = new List<CShape>();
-        private Stack<Command> commands = new Stack<Command>();
+        private Stack<Stack<Command>> commands = new Stack<Stack<Command>>();
 
         private int shapeType;
 
@@ -39,7 +39,8 @@ namespace circles_on_the_form
         }
         public void Draw(int x, int y)
         {
-            Unselect();
+            Stack<Command> commandStack = new Stack<Command>();
+            Unselect(commandStack);
 
             CShape? shape;
             switch (shapeType)
@@ -57,12 +58,12 @@ namespace circles_on_the_form
                     throw new ArgumentException("Invalid shape type");
             }
 
-            List<CShape> shapes = new List<CShape> { shape };
-
             Command command = new DrawCommand(this.shapes);
-            command.Execute(shapes);
+            command.Execute(shape);
 
-            commands.Push(command);
+
+            commandStack.Push(command);
+            commands.Push(commandStack);
         }
 
         public void Remove()
@@ -70,10 +71,17 @@ namespace circles_on_the_form
             List<CShape> selectedShapes = GetSelectedShapes();
             if (selectedShapes.Count == 0) return;
 
-            Command command = new DeleteCommand(shapes);
-            command.Execute(selectedShapes);
+            Stack<Command> commandStack = new Stack<Command>();
 
-            commands.Push(command);
+            for (int i = 0; i < selectedShapes.Count; i++)
+            {
+                Command command = new DeleteCommand(shapes);
+                command.Execute(selectedShapes[i]);
+
+                commandStack.Push(command);
+            }
+
+            commands.Push(commandStack);
         }
 
         public bool Select(int x, int y, bool isCtrlPressed)
@@ -84,15 +92,22 @@ namespace circles_on_the_form
                 return false;
             }
 
+            Stack<Command> commandStack = new Stack<Command>();
+
             if (!isCtrlPressed)
             {
-                Unselect();
+                Unselect(commandStack);
             }
 
-            Command command = new SelectCommand(true);
-            command.Execute(shapes);
+            for (int i = 0; i < shapes.Count; i++)
+            {
+                Command command1 = new SelectCommand(true);
+                command1.Execute(shapes[i]);
 
-            commands.Push(command);
+                commandStack.Push(command1);
+            }
+
+            commands.Push(commandStack);
 
             return true;
         }
@@ -102,10 +117,17 @@ namespace circles_on_the_form
             List<CShape> selectedShapes = GetSelectedShapes();
             if (selectedShapes.Count == 0) return;
 
-            Command command = new MoveCommand(moveX, moveY);
-            command.Execute(selectedShapes);
+            Stack<Command> commandStack = new Stack<Command>();
 
-            commands.Push(command);
+            for (int i = 0; i < selectedShapes.Count; i++)
+            {
+                Command command = new MoveCommand(moveX, moveY);
+                command.Execute(selectedShapes[i]);
+
+                commandStack.Push(command);
+            }
+
+            commands.Push(commandStack);
         }
 
         public void Scale(int scale)
@@ -113,10 +135,17 @@ namespace circles_on_the_form
             List<CShape> selectedShapes = GetSelectedShapes();
             if (selectedShapes.Count == 0) return;
 
-            Command command = new ScaleCommand(scale);
-            command.Execute(selectedShapes);
+            Stack<Command> commandStack = new Stack<Command>();
 
-            commands.Push(command);
+            for (int i = 0; i < shapes.Count; i++)
+            {
+                Command command = new ScaleCommand(scale);
+                command.Execute(selectedShapes[i]);
+
+                commandStack.Push(command);
+            }
+
+            commands.Push(commandStack);
         }
 
         public void SetColor(Color color)
@@ -124,19 +153,31 @@ namespace circles_on_the_form
             List<CShape> selectedShapes = GetSelectedShapes();
             if (selectedShapes.Count == 0) return;
 
-            Command command = new SetColorCommand(color);
-            command.Execute(selectedShapes);
+            Stack<Command> commandStack = new Stack<Command>();
 
-            commands.Push(command);
+            for (int i = 0; i < shapes.Count; i++)
+            {
+                Command command = new SetColorCommand(color);
+                command.Execute(selectedShapes[i]);
+
+                commandStack.Push(command);
+            }
+
+            commands.Push(commandStack);
         }
 
         public void Undo()
         {
             if (commands.Count > 0)
             {
-                Command command = commands.Pop();
+                Stack<Command> commandStack = commands.Pop();
 
-                command.UnExecute();
+                while (commandStack.Count > 0)
+                {
+                    Command command = commandStack.Pop();
+
+                    command.UnExecute();
+                }
             }
         }
 
@@ -169,19 +210,17 @@ namespace circles_on_the_form
             return foundShapes;
         }
 
-        private void Unselect()
+        private void Unselect(Stack<Command> commandStack)
         {
             List<CShape> selectedShapes = GetSelectedShapes();
             if (selectedShapes.Count == 0) return;
 
-            Command command = new SelectCommand(false);
-            command.Execute(selectedShapes);
-
-            commands.Push(command);
-        }
-        private bool IsNoneSelected()
-        {
-            return GetSelectedShapes().Count == 0;
+            for (int i = 0; i < selectedShapes.Count; i++)
+            {
+                Command command = new SelectCommand(false);
+                command.Execute(selectedShapes[i]);
+                commandStack.Push(command);
+            }
         }
     }
 }

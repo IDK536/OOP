@@ -11,25 +11,30 @@ namespace circles_on_the_form
     {
         private List<CShape> shapes;
 
-        private List<CShape> selections;
+        private CShape selection;
+        private int index;
 
         public DeleteCommand(List<CShape> shapes)
         {
             this.shapes = shapes;
         }
 
-        public override void Execute(List<CShape> shapes)
+        public override void Execute(CShape shape)
         {
-            selections = new List<CShape>(shapes);
-            for (int i = 0; i < selections.Count; i++) {
-                this.shapes.Remove(selections[i]);
+            selection = shape;
+            index = shapes.IndexOf(selection);
+
+            if (index != -1)
+            {
+                shapes.Remove(shape);
             }
         }
 
         public override void UnExecute()
         {
-            for (int i = 0; i < selections.Count; i++) {
-                shapes.Add(selections[i]);
+            if (index != -1)
+            {
+                shapes.Insert(index, selection);
             }
         }
 

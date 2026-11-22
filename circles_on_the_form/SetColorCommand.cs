@@ -9,31 +9,25 @@ namespace circles_on_the_form
     internal class SetColorCommand: Command
     {
         private Color color;
-        private List<Color> prevColors;
-        private List<CShape> selections;
+        private Color prevColor;
+        private CShape selection;
 
         public SetColorCommand(Color color)
         {
             this.color = color;
         }
 
-        public override void Execute(List<CShape> shapes)
+        public override void Execute(CShape shape)
         {
-            selections = new List<CShape>(shapes);
-            prevColors = new List<Color>(shapes.Count);
-            for (int i = 0; i < shapes.Count; i++)
-            {
-                prevColors.Add(shapes[i].color);
-                shapes[i].color = color;
-            }
+            selection = shape;
+            prevColor = shape.color;
+
+            shape.color = color;
         }
 
         public override void UnExecute()
         {
-            for (int i = 0; i < selections.Count; i++)
-            {
-                selections[i].color = prevColors[i];
-            }
+            selection.color = prevColor;
         }
 
         public override Command Clone()
