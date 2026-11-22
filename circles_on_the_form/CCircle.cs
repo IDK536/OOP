@@ -27,6 +27,23 @@ namespace circles_on_the_form
             }
             return false;
         }
+
+        public override bool InWindow(int bottomBorder, int rightBorder)
+        {
+            int left = point.X - radius;
+            int right = point.X + radius;
+            int top = point.Y - radius;
+            int bottom = point.Y + radius;
+
+
+            if (left >= 0 && right <= rightBorder &&
+                top >= 0 && bottom <= bottomBorder)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public override void Draw(Graphics g)
         {
             if (IsSelected)

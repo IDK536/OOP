@@ -38,55 +38,64 @@
             // 
             panel1.BackColor = SystemColors.Control;
             panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Location = new Point(14, 16);
-            panel1.Margin = new Padding(3, 4, 3, 4);
+            panel1.Location = new Point(12, 12);
+            panel1.MinimumSize = new Size(200, 200);
             panel1.Name = "panel1";
-            panel1.Size = new Size(592, 419);
+            panel1.Size = new Size(518, 287);
             panel1.TabIndex = 0;
-            panel1.MouseDown += Panel1_MouseDown;
             panel1.Paint += Panel1_Paint;
-
-
+            panel1.MouseDown += Panel1_MouseDown;
             // 
             // button1
             // 
-            button1.Location = new Point(662, 16);
+            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button1.Location = new Point(579, 12);
+            button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
-            button1.Size = new Size(100, 100);
+            button1.Size = new Size(88, 75);
             button1.TabIndex = 1;
-            button1.Text = "button1";
+            button1.Text = "Круг";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
-            button2.Location = new Point(662, 122);
+            button2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button2.Location = new Point(579, 92);
+            button2.Margin = new Padding(3, 2, 3, 2);
             button2.Name = "button2";
-            button2.Size = new Size(100, 100);
+            button2.Size = new Size(88, 75);
             button2.TabIndex = 2;
-            button2.Text = "button2";
+            button2.Text = "Квадрат";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button3
             // 
-            button3.Location = new Point(662, 228);
+            button3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button3.Location = new Point(579, 171);
+            button3.Margin = new Padding(3, 2, 3, 2);
             button3.Name = "button3";
-            button3.Size = new Size(100, 100);
+            button3.Size = new Size(88, 75);
             button3.TabIndex = 3;
-            button3.Text = "button3";
+            button3.Text = "Треугольник";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 451);
+            ClientSize = new Size(700, 311);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(panel1);
+            KeyPreview = true;
+            Margin = new Padding(3, 2, 3, 2);
+            MinimumSize = new Size(700, 350);
             Name = "Form1";
             Text = "Form1";
-            KeyPreview = true;
             KeyDown += Form1_KeyDown;
             ResumeLayout(false);
         }

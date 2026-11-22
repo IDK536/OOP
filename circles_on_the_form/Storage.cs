@@ -37,7 +37,7 @@ namespace circles_on_the_form
                 shapes[i].Draw(g);
             }
         }
-        public void Draw(int x, int y)
+        public void Draw(int x, int y, Rectangle bounds)
         {
             Stack<Command> commandStack = new Stack<Command>();
             Unselect(commandStack);
@@ -61,8 +61,16 @@ namespace circles_on_the_form
             Command command = new DrawCommand(this.shapes);
             command.Execute(shape);
 
-
             commandStack.Push(command);
+
+            if (!shape.InWindow(bounds.Height, bounds.Width))
+            {
+                Command uncommand = commandStack.Pop();
+                uncommand.UnExecute();
+            }
+
+
+            
             commands.Push(commandStack);
         }
 
@@ -92,27 +100,36 @@ namespace circles_on_the_form
                 return false;
             }
 
+
             Stack<Command> commandStack = new Stack<Command>();
 
-            if (!isCtrlPressed)
-            {
-                Unselect(commandStack);
-            }
-
+            bool isUnselected = false;
             for (int i = 0; i < shapes.Count; i++)
             {
+                if (shapes[i].IsSelected)
+                {
+                    continue;
+                }
+                else if (!isUnselected && !isCtrlPressed)
+                {
+                    Unselect(commandStack);
+                    isUnselected = true;
+                }
+
                 Command command1 = new SelectCommand(true);
                 command1.Execute(shapes[i]);
 
                 commandStack.Push(command1);
             }
-
-            commands.Push(commandStack);
+            if (commandStack.Count != 0)
+            {
+                commands.Push(commandStack);
+            }
 
             return true;
         }
 
-        public void Move(int moveX, int moveY)
+        public void Move(int moveX, int moveY, Rectangle bounds)
         {
             List<CShape> selectedShapes = GetSelectedShapes();
             if (selectedShapes.Count == 0) return;
@@ -125,24 +142,44 @@ namespace circles_on_the_form
                 command.Execute(selectedShapes[i]);
 
                 commandStack.Push(command);
+
+                if (!selectedShapes[i].InWindow(bounds.Height, bounds.Width))
+                {
+                    while (commandStack.Count > 0)
+                    {
+                        Command unCommand = commandStack.Pop();
+                        unCommand.UnExecute();
+                    }
+                    return;
+                }
             }
 
             commands.Push(commandStack);
         }
 
-        public void Scale(int scale)
+        public void Scale(int scale, Rectangle bounds)
         {
             List<CShape> selectedShapes = GetSelectedShapes();
             if (selectedShapes.Count == 0) return;
 
             Stack<Command> commandStack = new Stack<Command>();
 
-            for (int i = 0; i < shapes.Count; i++)
+            for (int i = 0; i < selectedShapes.Count; i++)
             {
                 Command command = new ScaleCommand(scale);
                 command.Execute(selectedShapes[i]);
 
                 commandStack.Push(command);
+
+                if (!selectedShapes[i].InWindow(bounds.Height, bounds.Width))
+                {
+                    while (commandStack.Count > 0) 
+                    { 
+                        Command unCommand = commandStack.Pop();
+                        unCommand.UnExecute();
+                    }
+                    return;
+                }
             }
 
             commands.Push(commandStack);
@@ -155,7 +192,7 @@ namespace circles_on_the_form
 
             Stack<Command> commandStack = new Stack<Command>();
 
-            for (int i = 0; i < shapes.Count; i++)
+            for (int i = 0; i < selectedShapes.Count; i++)
             {
                 Command command = new SetColorCommand(color);
                 command.Execute(selectedShapes[i]);

@@ -5,7 +5,7 @@ namespace circles_on_the_form
         private const int move = 10;
         private const int scale = 10;
 
-        Storage storage = new Storage(1);
+        Storage storage = new Storage(0);
         public Form1()
         {
             InitializeComponent();
@@ -22,7 +22,8 @@ namespace circles_on_the_form
 
             if (!storage.Select(e.X, e.Y, isCtrl))
             {
-                storage.Draw(e.X, e.Y);
+                Rectangle bounds = panel1.ClientRectangle;
+                storage.Draw(e.X, e.Y, bounds);
             }
 
             panel1.Invalidate();
@@ -57,29 +58,46 @@ namespace circles_on_the_form
                 storage.Remove();
                 panel1.Invalidate();
             }
+            else if (e.KeyCode == Keys.E)
+            {
+                Rectangle bounds = panel1.ClientRectangle;
+
+                storage.Scale(scale, bounds);
+                panel1.Invalidate();
+            }
             else if (e.KeyCode == Keys.Q)
             {
-                storage.Scale(scale);
+                Rectangle bounds = panel1.ClientRectangle;
+
+                storage.Scale(-scale, bounds);
                 panel1.Invalidate();
             }
             else if (e.KeyCode == Keys.A)
             {
-                storage.Move(-move, 0);
+                Rectangle bounds = panel1.ClientRectangle;
+
+                storage.Move(-move, 0, bounds);
                 panel1.Invalidate();
             }
             else if (e.KeyCode == Keys.D)
             {
-                storage.Move(move, 0);
+                Rectangle bounds = panel1.ClientRectangle;
+
+                storage.Move(move, 0, bounds);
                 panel1.Invalidate();
             }
             else if (e.KeyCode == Keys.W)
             {
-                storage.Move(0, -move);
+                Rectangle bounds = panel1.ClientRectangle;
+
+                storage.Move(0, -move, bounds);
                 panel1.Invalidate();
             }
             else if (e.KeyCode == Keys.S)
             {
-                storage.Move(0, move);
+                Rectangle bounds = panel1.ClientRectangle;
+
+                storage.Move(0, move, bounds);
                 panel1.Invalidate();
             }
             else if (e.KeyCode == Keys.Z)
@@ -87,8 +105,21 @@ namespace circles_on_the_form
                 storage.Undo();
                 panel1.Invalidate();
             }
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            storage.SwitchTyep(0);
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            storage.SwitchTyep(1);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            storage.SwitchTyep(2);
         }
     }
 }
